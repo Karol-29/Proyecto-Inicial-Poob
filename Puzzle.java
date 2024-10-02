@@ -39,6 +39,7 @@ public class Puzzle extends Rectangle {
         this(ending.length,ending[0].length);
         matrixEnding=convertir(ending);
         this.puzzleEnding=new Rectangle(ending.length*10,ending[0].length*10,w*10+50,0,"black");
+        addTile(matrixEnding,true);
         addTile(matrixStarting,false);
     }
     public Puzzle(char[][] ending,char[][] starting){
