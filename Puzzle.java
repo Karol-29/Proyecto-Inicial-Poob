@@ -45,7 +45,6 @@ public class Puzzle extends Rectangle {
     public Puzzle(char[][] ending,char[][] starting){
         this(ending);
         matrixStarting =convertir(starting);
-        addTile(matrixEnding,true);
         addTile(matrixStarting,false);
     }
     private void addTile(Tile [][] matrix, boolean type ) {//true=ending, starting=false 
@@ -160,4 +159,3 @@ public class Puzzle extends Rectangle {
         this.isVisible=false;
     }
 }
-

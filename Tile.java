@@ -1,4 +1,3 @@
-
 public class Tile extends Rectangle {
 
     private String color;  // Campo para almacenar el color de la tile
@@ -68,4 +67,3 @@ public class Tile extends Rectangle {
     }
 
 }
-
