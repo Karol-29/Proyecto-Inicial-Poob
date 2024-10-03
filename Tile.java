@@ -5,7 +5,7 @@ public class Tile extends Rectangle {
     private int xPosition;
     private int id;
     public Tile(int xPosition, int yPosition, String color) {
-        super(10, 10, xPosition*10, yPosition*10, color);  // Llama al constructor de Rectangle
+        super(50, 50, xPosition*50, yPosition*50, color);  // Llama al constructor de Rectangle
         this.color = color;  // Establece el color
         this.yPosition = yPosition; 
         this.xPosition = xPosition; // Guarda la posición X
@@ -49,13 +49,13 @@ public class Tile extends Rectangle {
         makeInvisible();  // Hace la tile invisible antes de moverla
         
         // Actualiza directamente las posiciones
-        int newXPosition = newColumn * 10;
-        int newYPosition = newRow * 10;
+        int newXPosition = newColumn * 50;
+        int newYPosition = newRow * 50;
         
         // Mueve la tile horizontal y verticalmente a su nueva posición
-        this.moveHorizontal(newXPosition - this.xPosition-10);
-        this.moveVertical(newYPosition - this.yPosition-10);
-        setPosition(newXPosition-10,newYPosition-10);
+        this.moveHorizontal(newXPosition - this.xPosition-50);
+        this.moveVertical(newYPosition - this.yPosition-50);
+        setPosition(newXPosition-50,newYPosition-50);
         makeVisible();  // Hace la tile visible después de moverla
     }
     public void setPosition(int xPosition,int yPosition){

@@ -3,7 +3,7 @@ import javax.swing.JOptionPane;
 import java.util.*;
 
 public class Puzzle extends Rectangle {
-    private int TILE_SIZE=10; // Tamaño de las tiles
+    private int TILE_SIZE=50; // Tamaño de las tiles
     private Tile [][] matrixStarting; // matriz inicial
     private Tile [][] matrixEnding; // matriz final
     private HashMap<Integer, int[]> setTileStarting; //conjuntos matriz inicial  
@@ -32,13 +32,13 @@ public class Puzzle extends Rectangle {
         this.h = h;
         this.w = w;
         this.isVisible = false;
-        this.puzzleStarting=new Rectangle(h*10,w*10,0,0,"black");
-        this.puzzleEnding=new Rectangle(h*10,w*10,w*10+50,0,"white");
+        this.puzzleStarting=new Rectangle(h*TILE_SIZE,w*TILE_SIZE,0,0,"black");
+        this.puzzleEnding=new Rectangle(h*TILE_SIZE,w*TILE_SIZE,w*TILE_SIZE+50,0,"white");
     }
     public Puzzle(char[][] ending){
         this(ending.length,ending[0].length);
         matrixEnding=convertir(ending);
-        this.puzzleEnding=new Rectangle(ending.length*10,ending[0].length*10,w*10+50,0,"black");
+        this.puzzleEnding=new Rectangle(ending.length*TILE_SIZE,ending[0].length*TILE_SIZE,(w*TILE_SIZE)+50,0,"black");
         addTile(matrixEnding,true);
         addTile(matrixStarting,false);
     }
@@ -47,14 +47,16 @@ public class Puzzle extends Rectangle {
         matrixStarting =convertir(starting);
         addTile(matrixStarting,false);
     }
+    
     private void addTile(Tile [][] matrix, boolean type ) {//true=ending, starting=false 
         if(type){
             for (int i = 0; i < matrix.length; i++) {
                 for (int j = 0; j < matrix[0].length; j++) {
                     if (matrix[i][j] != null) {
                         matrix[i][j].setId(currentId);
-                        matrix[i][j].moveHorizontal((w*10)-matrix[i][j].getXPosition()+50);        
-                        matrix[i][j].setPosition(matrix[i][j].getYPosition(),(w*10)-matrix[i][j].getXPosition()+50);
+                        matrix[i][j].moveHorizontal((((w)*TILE_SIZE+50+(j)*TILE_SIZE)-(j*TILE_SIZE)));
+                        matrix[i][j].propiedades();
+                        matrix[i][j].setPosition((w+j)*TILE_SIZE+50,i*TILE_SIZE);
                         setTileEnding.put(currentId,new int[]{currentId});
                         currentId++;
                         if(this.isVisible){
@@ -70,10 +72,10 @@ public class Puzzle extends Rectangle {
                         matrix[i][j].setId(currentId);
                         setTileStarting.put(currentId,new int[]{currentId});
                         currentId++;
-                        matrix[i][j].setPosition(matrix[i][j].getYPosition(),matrix[i][j].getXPosition());
+                        matrix[i][j].setPosition(j*TILE_SIZE,i*50);
                         if(this.isVisible){
-                    matrix[i][j].makeVisible();
-                    }  
+                            matrix[i][j].makeVisible();
+                        }  
                 }
                 }
             } 
@@ -128,10 +130,6 @@ public class Puzzle extends Rectangle {
                 if (matrixEnding[i][j] != null) {
                     matrixEnding[i][j].makeVisible();
                 }
-            }
-        }
-        for (int i = 0; i < h; i++) {
-            for (int j = 0; j < w; j++) {
                 if (this.matrixStarting[i][j] != null) {
                     matrixStarting[i][j].makeVisible();
                 }
@@ -147,10 +145,6 @@ public class Puzzle extends Rectangle {
                 if (matrixEnding[i][j] != null) {
                     matrixEnding[i][j].makeInvisible();
                 }
-            }
-        }
-        for (int i = 0; i < h; i++) {
-            for (int j = 0; j < w; j++) {
                 if (this.matrixStarting[i][j] != null) {
                     matrixStarting[i][j].makeInvisible();
                 }
@@ -158,4 +152,5 @@ public class Puzzle extends Rectangle {
         }
         this.isVisible=false;
     }
+    
 }
